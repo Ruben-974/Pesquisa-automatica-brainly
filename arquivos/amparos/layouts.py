@@ -9,12 +9,13 @@ def Menu_Principal(local, lista):
     """
     Parameters:
 
-    local: Ficará na barra de busca da janela
-    lista: Mostra os itens da lista na janela do programa
+        local: Ficará na barra de busca da janela
+
+        lista: Mostra os itens da lista na janela do programa
 
     Returns:
 
-    return sg.Window(...): Todas infomações necessarias para iniciar a janela com .read()
+        return sg.Window(...): Todas infomações necessarias para iniciar a janela com .read()
     
     """
 
@@ -32,7 +33,7 @@ def Mensagem_Erro(msg):
     """
     Parameters:
 
-    msg: Mensagem de erro que será visualizada
+        msg: Mensagem de erro que será visualizada
     
     """
 
@@ -43,6 +44,9 @@ def Mensagem_Erro(msg):
 
 
 def Resultados_Terminal(event, values):
+    '''
+    Temporario, somente para ajudar no desenvolvimento
+    '''
     print('-'*150)
     print(f'\n\033[1;34mEVENTO: \033[1;33m{event}\033[m')
 

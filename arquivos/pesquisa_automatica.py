@@ -27,10 +27,23 @@ while True:
 
         window = Menu_Principal(local=local, lista=lista_perguntas)
 
-    if valido is True: # Serão liberadas quando o programa receber um arquivo .xlsx valido
+    if valido is True: # Opções liberadas quando o programa receber um arquivo .xlsx valido
 
-        if event == 'Visualizar' and len(values['perguntas']) != 0:
-            pass
+        if event == 'Visualizar':
+
+            window.close()
+
+            if len(values['perguntas']) == 0:
+
+                Mensagem_Erro('Escolha uma pergunta antes de selecionar essa opção!')
+
+                window = Menu_Principal(local=local, lista=lista_perguntas)
+
+            else:
+
+                BotaoVisualizar(values['perguntas'][0])
+
+                window = Menu_Principal(local=local, lista=lista_perguntas)
 
         if event == 'Editar conteudo da lista':
             pass

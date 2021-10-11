@@ -6,12 +6,22 @@ def BotaoAtualizar(local):
     """
     Parameters:
 
-    local: Informe o local do arquivo .xlsx
+        local: Informe o local do arquivo .xlsx
 
     Returns:
 
-    return True, CriarListaPerguntas(local): Lista com as perguntas do arquivo .xlsx
-    return False, []: lista vazia
+        return True, CriarListaPerguntas(local):
+
+            True: Retorna verdadeiro pois o arquivo .xlsx e valido
+
+            CriarListaPerguntas(local): Como a o arquivo e valido, o programa irá pegar os as perguntas do arquivo
+
+
+        return False, []:
+
+            False: Retorna falso pois o arquivo .xlsx e invalido
+
+            []: Como o arquivo e invalido, o programa irá retornar uma lista vazia
     
     """
 
@@ -27,3 +37,7 @@ def BotaoAtualizar(local):
 
         return False, [] 
 
+
+def BotaoVisualizar(pergunta):
+
+    pass

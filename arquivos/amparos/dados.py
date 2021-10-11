@@ -7,15 +7,17 @@ def VerificarXlsx(local):
     """
     Parameters:
     
-    local: Arquivo .xlsx para ser analisado
+        local: Arquivo .xlsx para ser analisado
 
     Returns:
 
-    return 'ERRO: Caminho ou arquvio invalido': Mensagem
-    return 'ERRO: Arquivo inadequado': Mensagem
-    return 'ERRO: Arquivo .xlsx e fora dos padrões': Mensagem
+        return 'ERRO: Caminho ou arquvio invalido': Mensagem
 
-    return True: Se o caminho e o arquivo estiver correto
+        return 'ERRO: Arquivo inadequado': Mensagem
+
+        return 'ERRO: Arquivo .xlsx e fora dos padrões': Mensagem
+
+        return True: Se o caminho e o arquivo estiver correto
     
     """
 
@@ -60,11 +62,11 @@ def CriarListaPerguntas(local_xlsx):
     """
     Parameters:
 
-    local_xlsx: Local do arquivo .xlsx dentro dos padrões
+        local_xlsx: Local do arquivo .xlsx dentro dos padrões
 
     Returns:
 
-    return lista_perguntas: Lista com todas as perguntas do arquivo .xlxs
+        return lista_perguntas: Lista com todas as perguntas do arquivo .xlxs
 
     """
 
