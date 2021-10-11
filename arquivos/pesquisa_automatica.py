@@ -23,6 +23,7 @@ window = Menu_Principal(local=local, lista=lista_perguntas) # Criando janela pri
 while True:
 
     event, values = window.read() # Abrindo a janela principal, para receber valores do usuario
+    local = values['local']
 
     mostrar(event, values)
 
@@ -33,8 +34,6 @@ while True:
         break
 
     if event == 'Atualizar': # Programa será atualizado de acordo com as informações do usuario
-
-        local = values['local']
 
         window.close()
 
@@ -56,7 +55,7 @@ while True:
         if event == 'Atualizar respostas':
             pass
     
-    # Caso o usuario tente mesmo sem um arquvi valido irá aparece uma mensagem de erro
+    # Caso o usuario tente mesmo sem um arquivo valido irá aparecer uma mensagem de erro
 
     elif event != 'Atualizar': 
 
