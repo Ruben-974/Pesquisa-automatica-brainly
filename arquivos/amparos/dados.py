@@ -84,3 +84,4 @@ def CriarListaPerguntas(local_xlsx):
     
     return lista_perguntas
 
+

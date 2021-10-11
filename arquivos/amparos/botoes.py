@@ -10,8 +10,8 @@ def BotaoAtualizar(local):
 
     Returns:
 
-    return CriarListaPerguntas(local): Lista com as perguntas do arquivo .xlsx
-    return []: lista vazia
+    return True, CriarListaPerguntas(local): Lista com as perguntas do arquivo .xlsx
+    return False, []: lista vazia
     
     """
 
@@ -19,12 +19,11 @@ def BotaoAtualizar(local):
 
     if valido is True: # Se for valido retorna a lista com as perguntas
         
-        return CriarListaPerguntas(local) 
+        return True, CriarListaPerguntas(local) 
 
     else: # Se não retorna uma mensagem de erro e uma lista vazia 
 
         Mensagem_Erro(valido) 
 
-        return [] 
-
+        return False, [] 
 
