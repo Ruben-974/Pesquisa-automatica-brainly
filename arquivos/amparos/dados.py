@@ -1,3 +1,4 @@
+
 import pandas as pd
 
 # Verifica se o arquico .xlsx e um arquivo valido
@@ -74,7 +75,7 @@ def CriarListaPerguntas(local_xlsx):
 
     tabela_xlsx = pd.read_excel(local_xlsx)
 
-    # Deletar a coluna 'Unnamed: 0' ela e sempre crianda quando abrimos um arquivo .xlsx
+    # Deletar col 'Unnamed: 0' ela e sempre crianda quando abrimos um arquivo .xlsx
 
     if 'Unnamed: 0' in tabela_xlsx:
         tabela_xlsx.drop('Unnamed: 0', axis=1, inplace=True)
@@ -86,4 +87,38 @@ def CriarListaPerguntas(local_xlsx):
     
     return lista_perguntas
 
+# Analisando conteudo sobre a pergunta desejada
 
+def DicionarioComConteudo(pergunta, local):
+
+    """
+    Parameters:
+
+        pergunta: Será buscada no arquivo .xlsx e retornará suas respostas correspondente
+
+        local: Local do arquivo .xlsx para buscar sobre a sua pergunta
+
+    Returns:
+
+        conteudo: Retorna um dicionario espesifico com o conteudo sobre a sua pergunta
+    """
+
+    conteudo, tabela_xlsx = {}, pd.read_excel(local)
+
+    if 'Unnamed: 0' in tabela_xlsx:
+
+        tabela_xlsx.drop('Unnamed: 0', axis=1, inplace=True)
+
+    # Buscando a sua pergunta no arquivo .xlsx, para trazer os dados sobre
+
+    for c in range(len(tabela_xlsx['sua pergunta'])): 
+
+        if tabela_xlsx.loc[c]['sua pergunta'] == pergunta: # Buscando a sua pergunta dentre as outras
+
+            # Adicionando os dados no dicionario
+
+            for key in tabela_xlsx.keys():
+
+                conteudo[key] = tabela_xlsx.loc[c][key] 
+
+            return conteudo

@@ -33,17 +33,15 @@ while True:
 
             window.close()
 
-            if len(values['perguntas']) == 0:
+            if len(values['perguntas']) == 0: # Se o ususario não selecionou nenhum item da lista
 
-                Mensagem_Erro('Escolha uma pergunta antes de selecionar essa opção!')
+                Mensagem_Erro('Escolha uma pergunta antes de selecionar essa opção!') # Mensagem de erro
 
-                window = Menu_Principal(local=local, lista=lista_perguntas)
+            else: # Se selecionou o item
 
-            else:
+                BotaoVisualizar(pergunta=values['perguntas'][0], local=local) # Cria interfase para visualizar o conteudo
 
-                BotaoVisualizar(values['perguntas'][0])
-
-                window = Menu_Principal(local=local, lista=lista_perguntas)
+            window = Menu_Principal(local=local, lista=lista_perguntas)
 
         if event == 'Editar conteudo da lista':
             pass

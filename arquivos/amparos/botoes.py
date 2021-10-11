@@ -1,5 +1,7 @@
-from amparos.dados import CriarListaPerguntas, VerificarXlsx
-from amparos.layouts import Mensagem_Erro
+from amparos.dados import *
+from amparos.layouts import *
+
+# Executar quando o botão "Atualizar" for chamado
 
 def BotaoAtualizar(local):
 
@@ -37,7 +39,19 @@ def BotaoAtualizar(local):
 
         return False, [] 
 
+# Executar quando o botão "Visualizar" for chamado
 
-def BotaoVisualizar(pergunta):
+def BotaoVisualizar(pergunta, local):
 
-    pass
+    '''
+    Parameters:
+
+        pergunta: Pergunta que você deseja analisar o conteudo 
+
+        local: Local do arquivo .xlsx (Valido)
+        
+    '''
+
+    conteudo = DicionarioComConteudo(pergunta=pergunta, local=local)
+
+    Visualizar_Conteudo(conteudo)
