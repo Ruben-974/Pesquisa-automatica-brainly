@@ -3,27 +3,27 @@ from amparos.layouts import Menu_Principal
 
 lista_perguntas, local = [], ''
 
-window = Menu_Principal(local=local, lista_perguntas=lista_perguntas)
+window = Menu_Principal(local=local, lista=lista_perguntas) # Criando janela principal do programa
 
 while True:
 
-    event_nivel1, values_nivel1 = window.read()
+    event, values = window.read() # Abrindo a janela principal, para receber valores do usuario
 
-    print(f'{event_nivel1}\n{values_nivel1}')
+    print(f'{event}\n{values}')
 
-    if event_nivel1 in ('Sair', None):
+    if event in ('Sair', None): # O programa será finalizado por completo
 
         window.close()
 
         break
 
-    if event_nivel1 == 'Atualizar':
+    if event == 'Atualizar': # Programa será atualizado de acordo com as informações do usuario
 
-        local = values_nivel1['local']
+        local = values['local']
 
         window.close()
 
-        lista_perguntas = BotaoAtualizar(local)
+        lista_perguntas = BotaoAtualizar(local) # Recebendo lista de perguntas do arquivo .xlsx
 
-        window = Menu_Principal(local=local, lista_perguntas=lista_perguntas)
+        window = Menu_Principal(local=local, lista=lista_perguntas) # Criando janela principal do programa
 
