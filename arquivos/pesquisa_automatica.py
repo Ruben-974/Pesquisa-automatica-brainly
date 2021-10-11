@@ -1,20 +1,6 @@
-from amparos.botoes import BotaoAtualizar
-from amparos.layouts import Menu_Principal, Mensagem_Erro
 
-def mostrar(event, values):
-    print('-'*150)
-    print(f'\n\033[1;34mEVENTO: \033[1;33m{event}\033[m')
-
-    try:
-
-        for k, v in values.items():
-            print()
-            print(f'\033[1;34mCHAVE: \033[1;33m{k}\033[m')
-            print(f'\033[1;34mVALOR: \033[1;33m{v}\033[m')
-
-    except:
-
-        pass
+from amparos.botoes import *
+from amparos.layouts import *
 
 lista_perguntas, local, valido = [], '', False
 
@@ -25,7 +11,7 @@ while True:
     event, values = window.read() # Abrindo a janela principal, para receber valores do usuario
     local = values['local']
 
-    mostrar(event, values)
+    Resultados_Terminal(event, values)
 
     if event in ('Sair', None): # O programa será finalizado por completo
 
