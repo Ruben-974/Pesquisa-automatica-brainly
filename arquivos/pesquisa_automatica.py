@@ -42,7 +42,7 @@ while True:
 
             window.close()
 
-            BotaoEditarLista(lista_perguntas, local=local)
+            lista_perguntas = BotaoEditarLista(lista_perguntas, local=local) # Cria interface do menu editar lista
 
             window = Menu_Principal(local=local, lista=lista_perguntas)
 

@@ -79,7 +79,7 @@ def BotaoEditarLista(lista, local):
 
             window.close()
 
-            break
+            return lista
 
         if event == 'Visualizar':
 
@@ -93,7 +93,7 @@ def BotaoEditarLista(lista, local):
 
             window.close()
 
-            BotaoAddPergunta()
+            lista = BotaoAddPergunta(lista=lista, local=local)
 
             window = Editar_Lista(lista)
         
@@ -115,9 +115,52 @@ def BotaoEditarLista(lista, local):
 
 # Executar quando o botão "Adicionar pergunta" for chamado
 
-def BotaoAddPergunta():
+def BotaoAddPergunta(lista, local):
 
-    pass
+    """
+    Parameters:
+
+        local: Local do arquivo .xlsx (Valido)
+
+    Returns:
+
+        return CriarListaPerguntas(local): Retorna a lista de perguntas atualizada com a nova pergunta adicionada
+
+    """
+
+    # Abrindo a janela e recebendo valores
+
+    window = Recebe_Pergunta()
+
+    while True:
+
+        event, values = window.read()
+
+        Resultados_Terminal(event=event, values=values)
+
+        if event in ('Cancelar', None): # Cancela a janela
+
+            window.close()
+
+            return lista
+
+        if event == 'Adicionar':
+
+            if values['adicionar_pergunta'] == '': # Não e possival adicionar uma pergunta vazia
+
+                window.close()
+
+                Mensagem_Erro('Você deve digitar uma pergunta') # Mesagem de erro
+
+                window = Recebe_Pergunta()
+
+            else:
+
+                window.close()
+
+                AdicionarPerguntaLista(pergunta=values['adicionar_pergunta'], local=local) # Add pergunta na lista
+
+                return CriarListaPerguntas(local)
 
 # Executar quando o botão "Editar pergunta / conteudo" for chamado
 

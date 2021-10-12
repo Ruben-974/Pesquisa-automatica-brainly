@@ -96,6 +96,21 @@ def Editar_Lista(lista):
 
     return sg.Window('Editar lista - Pesquisa automatica v1.0', layout)
 
+# Janela que recebe uma pergunta
+
+def Recebe_Pergunta():
+
+    """
+    Returns:
+
+        return sg.Window(...): Todas infomações necessarias para iniciar a janela com .read()
+    """
+
+    layout = [[sg.Input(key='adicionar_pergunta')],
+             [sg.Button('Adicionar'), sg.Button('Cancelar')]]
+
+    return sg.Window('Adicionar pergunta - Pesquisa Automatica v1.0', layout)
+
 # Um print "especial" para visualizar oque está acontecendo no terminal enquanto o programa e executado
 
 def Resultados_Terminal(event, values):

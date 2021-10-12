@@ -124,3 +124,53 @@ def DicionarioComConteudo(pergunta, local):
                 conteudo[key] = tabela_xlsx.loc[c][key] 
 
             return conteudo
+
+# Adiciona a nova pergunta desejada
+
+def AdicionarPerguntaLista(pergunta, local):
+
+    """
+    Parameters:
+
+        pergunta: Recebe a pergunta que você deseja adicionar na lista de perguntas
+
+        local: Recebe o local do arquivo .xlsx (valido)
+    
+    """
+
+    colunas, celulas = [], []
+
+    # Criando tabela_xlsx e tirando a coluna 'Unnamed: 0'
+
+    tabela_xlsx = pd.read_excel(local)
+
+    if 'Unnamed: 0' in tabela_xlsx:
+
+        tabela_xlsx.drop('Unnamed: 0', axis=1, inplace=True)
+
+    # Buscando o nome das colunas no arquivo .xlsx
+
+    for coluna in tabela_xlsx.keys():
+        colunas.append(coluna)
+
+    # Adicionando colunas em um DataFrame
+    
+    tabela = pd.DataFrame(columns=colunas)
+
+    # Adicionado as linhas no Dataframe 
+
+    for linha in range(len(tabela_xlsx)):
+        for coluna in colunas:
+            celulas.append(tabela_xlsx.loc[linha][coluna])
+
+        tabela.loc[linha] = celulas
+        celulas = []
+
+    # Adiciondo sua pergunta no Dataframe
+
+    tabela.loc[len(tabela)] = [pergunta] + [''] * 6
+
+    # Salvando o DataFrame como arquivo original (Com as informações anteriores e com a pergunta recem adicionada)
+
+    tabela.to_excel(local)
+
