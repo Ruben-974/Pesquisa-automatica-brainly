@@ -48,12 +48,14 @@ def VerificarXlsx(local):
     for c in conter_na_tabela:
         if c in tabela.keys():
             contem += 1
+            
         else:
-            return 'ERRO: Arquivo .xlsx e fora dos padrões'
+            return 'ERRO: Arquivo .xlsx fora dos padrões'
 
         # Se o arquivo tiver as colunas necessarias
 
         if contem == len(conter_na_tabela):
+            
             return True
 
 # Cria uma lista com as pergunta do arquivo .xlsx
