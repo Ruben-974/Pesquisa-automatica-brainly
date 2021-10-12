@@ -75,8 +75,19 @@ def Visualizar_Conteudo(conteudo):
     window.read()
     window.close()
 
+# Cria a janela de Editar lista
 
 def Editar_Lista(lista):
+
+    """
+    Parameters:
+
+        lista: Mostra os itens da lista na janela do programa
+
+    Returns:
+
+        return sg.Window(...): Todas infomações necessarias para iniciar a janela com .read()
+    """
 
     layout = [[sg.Button('Adicionar pergunta'), sg.Button('Editar pergunta / conteudo'), 
             sg.Button('Deletar pergunta / conteudo')],

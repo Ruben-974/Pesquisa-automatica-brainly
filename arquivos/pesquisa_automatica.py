@@ -2,9 +2,9 @@
 from amparos.botoes import *
 from amparos.layouts import *
 
-lista_perguntas, local, valido = [], '', False
+valido, lista_perguntas = False, []
 
-window = Menu_Principal(local=local, lista=lista_perguntas) # Criando janela principal do programa
+window = Menu_Principal(local='', lista=[]) # Criando janela principal do programa
 
 while True:
 
