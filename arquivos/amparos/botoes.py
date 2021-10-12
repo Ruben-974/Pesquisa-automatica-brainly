@@ -88,3 +88,45 @@ def BotaoEditarLista(lista, local):
             BotaoVisualizar(pergunta=pergunta, local=local) # Cria interfase para visualizar o conteudo
 
             window = Editar_Lista(lista)
+
+        if event == 'Adicionar pergunta':
+
+            window.close()
+
+            BotaoAddPergunta()
+
+            window = Editar_Lista(lista)
+        
+        if event == 'Editar pergunta / conteudo':
+
+            window.close()
+
+            BotaoEditPergCont()
+
+            window = Editar_Lista(lista)
+
+        if event == 'Deletar pergunta / conteudo':
+
+            window.close()
+
+            BotaoDellPergCont()
+
+            window = Editar_Lista(lista)
+
+# Executar quando o botão "Adicionar pergunta" for chamado
+
+def BotaoAddPergunta():
+
+    pass
+
+# Executar quando o botão "Editar pergunta / conteudo" for chamado
+
+def BotaoEditPergCont():
+
+    pass
+
+# Executar quando o botão "Deletar pergunta / conteudo" for chamado
+
+def BotaoDellPergCont():
+
+    pass
