@@ -111,6 +111,20 @@ def Recebe_Pergunta():
 
     return sg.Window('Adicionar pergunta - Pesquisa Automatica v1.0', layout)
 
+# Janela que recebe sim ou não para deletar a pergunta
+
+def Janela_deletar(pergunta):
+
+    if len(pergunta) > 35:
+
+        pergunta = pergunta[:35]
+
+    layout = [[sg.Text(f'Deletar pergunta / conteudo da pergunta:\n'
+               f'{pergunta} ...')],
+              [sg.Button('Sim'), sg.Button('Não')]]
+
+    return sg.Window('Deletar pergunta - Pesquisa automatica v1.0', layout)
+
 # Um print "especial" para visualizar oque está acontecendo no terminal enquanto o programa e executado
 
 def Resultados_Terminal(event, values):

@@ -125,20 +125,11 @@ def DicionarioComConteudo(pergunta, local):
 
             return conteudo
 
-# Adiciona a nova pergunta desejada
+# Cria DataFrame da tebala .xlsx
 
-def AdicionarPerguntaLista(pergunta, local):
+def CriarDataFrame(local):
 
-    """
-    Parameters:
-
-        pergunta: Recebe a pergunta que você deseja adicionar na lista de perguntas
-
-        local: Recebe o local do arquivo .xlsx (valido)
-    
-    """
-
-    colunas, celulas = [], []
+    colunas, linhas = [], []
 
     # Criando tabela_xlsx e tirando a coluna 'Unnamed: 0'
 
@@ -161,16 +152,62 @@ def AdicionarPerguntaLista(pergunta, local):
 
     for linha in range(len(tabela_xlsx)):
         for coluna in colunas:
-            celulas.append(tabela_xlsx.loc[linha][coluna])
+            linhas.append(tabela_xlsx.loc[linha][coluna])
 
-        tabela.loc[linha] = celulas
-        celulas = []
+        tabela.loc[linha] = linhas
+        linhas = []
+    
+    return tabela
 
-    # Adiciondo sua pergunta no Dataframe
+# Adiciona a nova pergunta desejada
 
+def AdicionarPerguntaLista(pergunta, local):
+
+    """
+    Parameters:
+
+        pergunta: Recebe a pergunta que você deseja adicionar na lista de perguntas
+
+        local: Recebe o local do arquivo .xlsx (valido)
+    
+    """
+
+    tabela = CriarDataFrame(local=local)
+    
+    # Adiciondo sua pergunta na tabela
+ 
     tabela.loc[len(tabela)] = [pergunta] + [''] * 6
 
-    # Salvando o DataFrame como arquivo original (Com as informações anteriores e com a pergunta recem adicionada)
+    # Salvando a tabela como arquivo original (Com as informações anteriores e com a pergunta recem adicionada)
 
     tabela.to_excel(local)
 
+# Deleta a pergunta e o conteudo desejado
+
+def DeletarPergunta(pergunta, local):
+
+    """
+    Parameters:
+
+        pergunta: Recebe a pergunta que você deseja apadar da lista de perguntas
+
+        local: Recebe o local do arquivo .xlsx (valido)
+    
+    """
+
+    tabela = CriarDataFrame(local)
+
+    for linha in range(len(tabela['sua pergunta'])):
+
+        # Se 'sua pergunda' da linha atual for igual a pergunta que o usuario deseja apagar
+
+        if tabela.loc[linha]['sua pergunta'] == pergunta:
+
+            # Apaga a linha e encerra o sistema de repetição e salva isso no arquivo .xlsx
+
+            tabela = tabela.drop(linha)
+
+            tabela.to_excel(local)
+
+            break
+    

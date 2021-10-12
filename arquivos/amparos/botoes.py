@@ -1,4 +1,5 @@
 
+from PySimpleGUI.PySimpleGUI import ListOfLookAndFeelValues
 from amparos.dados import *
 from amparos.layouts import *
 
@@ -96,20 +97,20 @@ def BotaoEditarLista(lista, local):
             lista = BotaoAddPergunta(lista=lista, local=local)
 
             window = Editar_Lista(lista)
+
+        if event == 'Deletar pergunta / conteudo':
+
+            window.close()
+
+            lista = BotaoDellPergCont(pergunta=pergunta, local=local, lista=lista)
+
+            window = Editar_Lista(lista)
         
         if event == 'Editar pergunta / conteudo':
 
             window.close()
 
             BotaoEditPergCont()
-
-            window = Editar_Lista(lista)
-
-        if event == 'Deletar pergunta / conteudo':
-
-            window.close()
-
-            BotaoDellPergCont()
 
             window = Editar_Lista(lista)
 
@@ -162,14 +163,56 @@ def BotaoAddPergunta(lista, local):
 
                 return CriarListaPerguntas(local)
 
+# Executar quando o botão "Deletar pergunta / conteudo" for chamado
+
+def BotaoDellPergCont(pergunta, lista, local):
+
+    '''
+    Parameters:
+
+        pergunta: pergunta (e conteudo) que o ususario deseja apagar da lista de pergunta
+
+        local: local do arquivo .xlsx (valido)
+
+    Returns:
+
+        return CriarListaPerguntas(local): Retorna uma lista atualizada com a pergunta deletada
+    '''
+
+    if pergunta == []: # Verifica se alguma pergunta foi selecionada
+
+        Mensagem_Erro('Escolha uma pergunta da lista para deletar')
+
+        return lista
+
+    else:
+
+        # Cria uma janela esprando a resposta do ususario Sim ou não (ou None)
+
+        window = Janela_deletar(pergunta[0])
+
+        while True:
+
+            event, values = window.read()
+
+            if event in ('Não', None):
+
+                window.close() # Fecha a janela
+
+                return lista
+
+            if event == 'Sim': # Deleta a pergunta desejada
+                
+                window.close()
+
+                DeletarPergunta(pergunta=pergunta[0], local=local)
+
+                return CriarListaPerguntas(local)
+    
 # Executar quando o botão "Editar pergunta / conteudo" for chamado
 
 def BotaoEditPergCont():
 
     pass
 
-# Executar quando o botão "Deletar pergunta / conteudo" for chamado
 
-def BotaoDellPergCont():
-
-    pass
