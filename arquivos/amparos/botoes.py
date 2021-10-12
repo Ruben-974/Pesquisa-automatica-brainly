@@ -1,5 +1,4 @@
 
-from PySimpleGUI.PySimpleGUI import ListOfLookAndFeelValues
 from amparos.dados import *
 from amparos.layouts import *
 
@@ -110,7 +109,7 @@ def BotaoEditarLista(lista, local):
 
             window.close()
 
-            BotaoEditPergCont()
+            BotaoEditPergCont(pergunta=pergunta, local=local)
 
             window = Editar_Lista(lista)
 
@@ -211,8 +210,26 @@ def BotaoDellPergCont(pergunta, lista, local):
     
 # Executar quando o botão "Editar pergunta / conteudo" for chamado
 
-def BotaoEditPergCont():
+def BotaoEditPergCont(pergunta, local):
 
-    pass
+    if pergunta == []:
+
+        Mensagem_Erro('Escolha uma pergunta da lista para editar')
+
+    else:
+
+        conteudo = DicionarioComConteudo(pergunta[0], local)
+
+        window = Menu_Editar(conteudo=conteudo)
+
+        while True:
+
+            event, values = window.read()
+
+            if event in ('Cancelar', None):
+
+                window.close()
+
+                break
 
 
