@@ -52,7 +52,6 @@ def Visualizar_Conteudo(conteudo):
     '''
 
     layout = [[sg.Multiline(
-
         f'\n- Sua pergunta - \n\n'
         f'{conteudo["sua pergunta"]}\n\n'
         f' - 1° Resposta - \n\n'
@@ -65,7 +64,7 @@ def Visualizar_Conteudo(conteudo):
         f'{conteudo["2 pergunta similar 2 resposta"]}',
         size=(90, 25))], [sg.Button('Ok')]]
 
-    # Caso os caracters da pergunta for > 70 longo ira diminuir o tamanho para 70 caracters, para visualização na Bar
+    # Caso os caracters da pergunta for > 70 ira diminuir o tamanho para 70 caracters, para visualizar na bar
 
     if len(conteudo["sua pergunta"]) > 70:
         window = sg.Window(f'{conteudo["sua pergunta"][:70]}... - Pesquisa automatica v1.0', layout)
