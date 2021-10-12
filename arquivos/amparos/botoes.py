@@ -232,4 +232,8 @@ def BotaoEditPergCont(pergunta, local):
 
                 break
 
+            if event == 'Salvar':
+
+                pass
+
 

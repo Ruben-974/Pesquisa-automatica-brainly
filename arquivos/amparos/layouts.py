@@ -125,6 +125,29 @@ def Janela_deletar(pergunta):
 
     return sg.Window('Deletar pergunta - Pesquisa automatica v1.0', layout)
 
+# Janela para editar conteudo da pergunta escolhida
+
+def Menu_Editar(conteudo):
+
+    if len(conteudo['sua pergunta']) > 70:
+
+        conteudo['sua pergunta'] = conteudo['sua pergunta'][:70]
+
+    layout = [[sg.Text('Sua pergunta')],
+        [sg.Multiline(conteudo['sua pergunta'], size=(104, 2))],
+        [sg.Text('1° Pergunta similar'), sg.Text(f'{" " * 65}2° Pergunta similar')],
+        [sg.Multiline(conteudo['1 pergunta similar'], size=(50, 2)),
+        sg.Multiline(conteudo['2 pergunta similar'], size=(50, 2))],
+        [sg.Text('1° Resposta similar'), sg.Text(f'{" " * 64}1° Resposta similar')],
+        [sg.Multiline(conteudo['1 pergunta similar 1 resposta'], size=(50, 5)),
+        sg.Multiline(conteudo['2 pergunta similar 1 resposta'],  size=(50, 5))],
+        [sg.Text('2° Resposta similar'), sg.Text(f'{" " * 64}2° Resposta similar')],
+        [sg.Multiline(conteudo['1 pergunta similar 2 resposta'], size=(50, 5)),
+        sg.Multiline(conteudo['2 pergunta similar 2 resposta'], size=(50, 5))],
+        [sg.Button('Salvar'), sg.Button('Cancelar')]]
+
+    return sg.Window(f'{conteudo["sua pergunta"]} - Pesquisa automatica v1.0', layout)
+    
 # Um print "especial" para visualizar oque está acontecendo no terminal enquanto o programa e executado
 
 def Resultados_Terminal(event, values):
@@ -149,28 +172,5 @@ def Resultados_Terminal(event, values):
     except:
 
         pass
-
-
-def Menu_Editar(conteudo):
-
-    if len(conteudo['sua pergunta']) > 70:
-
-        conteudo['sua pergunta'] = conteudo['sua pergunta'][:70]
-
-    layout = [[sg.Text('Sua pergunta')],
-        [sg.Multiline(conteudo['sua pergunta'], size=(104, 2))],
-        [sg.Text('1° Pergunta similar'), sg.Text(f'{" " * 65}2° Pergunta similar')],
-        [sg.Multiline(conteudo['1 pergunta similar'], size=(50, 2)),
-        sg.Multiline(conteudo['2 pergunta similar'], size=(50, 2))],
-        [sg.Text('1° Resposta similar'), sg.Text(f'{" " * 64}1° Resposta similar')],
-        [sg.Multiline(conteudo['1 pergunta similar 1 resposta'], size=(50, 5)),
-        sg.Multiline(conteudo['2 pergunta similar 1 resposta'],  size=(50, 5))],
-        [sg.Text('2° Resposta similar'), sg.Text(f'{" " * 64}2° Resposta similar')],
-        [sg.Multiline(conteudo['1 pergunta similar 2 resposta'], size=(50, 5)),
-        sg.Multiline(conteudo['2 pergunta similar 2 resposta'], size=(50, 5))],
-        [sg.Button('Salvar'), sg.Button('Cancelar')]]
-
-    return sg.Window(f'{conteudo["sua pergunta"]} - Pesquisa automatica v1.0', layout)
-    
 
 
