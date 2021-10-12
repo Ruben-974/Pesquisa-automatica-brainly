@@ -9,7 +9,8 @@ window = Menu_Principal(local=local, lista=lista_perguntas) # Criando janela pri
 while True:
 
     event, values = window.read() # Abrindo a janela principal, para receber valores do usuario
-    local = values['local']
+
+    local, pergunta = values['local'], values['pergunta']
 
     Resultados_Terminal(event, values)
 
@@ -33,18 +34,17 @@ while True:
 
             window.close()
 
-            if len(values['perguntas']) == 0: # Se o ususario não selecionou nenhum item da lista
-
-                Mensagem_Erro('Escolha uma pergunta antes de selecionar essa opção!') # Mensagem de erro
-
-            else: # Se selecionou o item
-
-                BotaoVisualizar(pergunta=values['perguntas'][0], local=local) # Cria interfase para visualizar o conteudo
+            BotaoVisualizar(pergunta=pergunta, local=local) # Cria interfase para visualizar o conteudo
 
             window = Menu_Principal(local=local, lista=lista_perguntas)
 
-        if event == 'Editar conteudo da lista':
-            pass
+        if event == 'Editar lista':
+
+            window.close()
+
+            BotaoEditarLista(lista_perguntas, local=local)
+
+            window = Menu_Principal(local=local, lista=lista_perguntas)
 
         if event == 'Criar arquivo':
             pass
@@ -52,9 +52,7 @@ while True:
         if event == 'Atualizar respostas':
             pass
     
-    # Caso o usuario tente mesmo sem um arquivo valido irá aparecer uma mensagem de erro
-
-    elif event != 'Atualizar': 
+    elif event != 'Atualizar': # Caso o usuario tente com um arquivo valido irá aparecer uma mensagem de erro
 
         window.close()
 

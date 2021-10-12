@@ -19,8 +19,8 @@ def Menu_Principal(local, lista):
     """
 
     layout = [[sg.Input(local, key='local'), sg.FileBrowse('Browse', file_types=(("ALL Files", ".xlsx*"),)),sg.Button('Atualizar', size=(12, 0))],
-        [sg.Listbox(lista, key='perguntas', size=(68, 5), enable_events=True)],
-        [sg.Button('Visualizar'), sg.Button('Editar conteudo da lista'),sg.Button('Criar arquivo'), sg.Button('Atualizar respostas'), sg.Button('Sair')]]
+        [sg.Listbox(lista, key='pergunta', size=(68, 5), enable_events=True)],
+        [sg.Button('Visualizar'), sg.Button('Editar lista'),sg.Button('Criar arquivo'), sg.Button('Atualizar respostas'), sg.Button('Sair')]]
 
     return sg.Window('Menu Principal - Pesquisa Automatica v1.0', layout, location=(420, 300))
 
@@ -75,6 +75,16 @@ def Visualizar_Conteudo(conteudo):
     window.read()
     window.close()
 
+
+def Editar_Lista(lista):
+
+    layout = [[sg.Button('Adicionar pergunta'), sg.Button('Editar pergunta / conteudo'), 
+            sg.Button('Deletar pergunta / conteudo')],
+            [sg.Listbox(lista, key='pergunta', size=(68, 5))],
+            [sg.Button('Visualizar'), sg.Button('Cancelar')]]
+
+    return sg.Window('Editar lista - Pesquisa automatica v1.0', layout)
+
 # Um print "especial" para visualizar oque está acontecendo no terminal enquanto o programa e executado
 
 def Resultados_Terminal(event, values):
@@ -99,3 +109,5 @@ def Resultados_Terminal(event, values):
     except:
 
         pass
+
+

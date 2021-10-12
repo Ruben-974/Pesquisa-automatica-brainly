@@ -1,3 +1,4 @@
+
 from amparos.dados import *
 from amparos.layouts import *
 
@@ -49,9 +50,41 @@ def BotaoVisualizar(pergunta, local):
         pergunta: Pergunta que você deseja analisar o conteudo 
 
         local: Local do arquivo .xlsx (Valido)
-        
+
     '''
 
-    conteudo = DicionarioComConteudo(pergunta=pergunta, local=local)
+    if pergunta == []: # Se o ususario não selecionou nenhuma pergunta
 
-    Visualizar_Conteudo(conteudo)
+        Mensagem_Erro('Escolha uma pergunta antes de selecionar essa opção!') # Mensagem de erro
+
+    else:
+
+        conteudo = DicionarioComConteudo(pergunta=pergunta[0], local=local)
+
+        Visualizar_Conteudo(conteudo)
+
+# Executar quando o botão "Editar Lista" for chamado
+
+def BotaoEditarLista(lista, local):
+
+    window = Editar_Lista(lista)
+
+    while True:
+
+        event, values = window.read()
+
+        pergunta = values['pergunta']
+
+        if event in (None, 'Cancelar'):
+
+            window.close()
+
+            break
+
+        if event == 'Visualizar':
+
+            window.close()
+
+            BotaoVisualizar(pergunta=pergunta, local=local) # Cria interfase para visualizar o conteudo
+
+            window = Editar_Lista(lista)
