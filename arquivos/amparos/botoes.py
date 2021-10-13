@@ -67,6 +67,17 @@ def BotaoVisualizar(pergunta, local):
 
 def BotaoEditarLista(lista, local):
 
+    """
+    Parameters:
+
+        lista: Recebe a lista de pergunta que serão mostradas na janela do programa
+        local: Local do arquivo .xlsx (Valido)
+
+    Returs:
+
+        return lista: Retorna a lista atualizada para mostrar na janela principal do programa
+    """
+
     window = Editar_Lista(lista)
 
     while True:
@@ -75,43 +86,29 @@ def BotaoEditarLista(lista, local):
 
         pergunta = values['pergunta']
 
-        if event in (None, 'Cancelar'):
+        window.close()
 
-            window.close()
+        if event in (None, 'Cancelar'): # Fecha a janela atual e retorna para a janela principal do programa
 
             return lista
 
-        if event == 'Visualizar':
-
-            window.close()
+        if event == 'Visualizar': # Abre uma janela para visualizar o conteudo da pergunta escolhida
 
             BotaoVisualizar(pergunta=pergunta, local=local) # Cria interfase para visualizar o conteudo
 
-            window = Editar_Lista(lista)
-
-        if event == 'Adicionar pergunta':
-
-            window.close()
+        if event == 'Adicionar pergunta': # Recebe a pergunta desejada para adicionar a lista de perguntas
 
             lista = BotaoAddPergunta(lista=lista, local=local)
 
-            window = Editar_Lista(lista)
-
-        if event == 'Deletar pergunta / conteudo':
-
-            window.close()
+        if event == 'Deletar pergunta / conteudo': # Deleta a pergunta desejada
 
             lista = BotaoDellPergCont(pergunta=pergunta, local=local, lista=lista)
-
-            window = Editar_Lista(lista)
         
-        if event == 'Editar pergunta / conteudo':
-
-            window.close()
+        if event == 'Editar pergunta / conteudo': # Abre janela para editar o conteudo da pergunta escolhida
 
             lista = BotaoEditPergCont(pergunta=pergunta, local=local, lista=lista)
 
-            window = Editar_Lista(lista)
+        window = Editar_Lista(lista)
 
 # Executar quando o botão "Adicionar pergunta" for chamado
 
@@ -136,11 +133,9 @@ def BotaoAddPergunta(lista, local):
 
         event, values = window.read()
 
-        Resultados_Terminal(event=event, values=values)
+        window.close()
 
         if event in ('Cancelar', None): # Cancela a janela
-
-            window.close()
 
             return lista
 
@@ -148,15 +143,11 @@ def BotaoAddPergunta(lista, local):
 
             if values['adicionar_pergunta'] == '': # Não e possival adicionar uma pergunta vazia
 
-                window.close()
-
                 Mensagem_Erro('Você deve digitar uma pergunta') # Mesagem de erro
 
                 window = Recebe_Pergunta()
 
             else:
-
-                window.close()
 
                 AdicionarPerguntaLista(pergunta=values['adicionar_pergunta'], local=local) # Add pergunta na lista
 
@@ -194,15 +185,13 @@ def BotaoDellPergCont(pergunta, lista, local):
 
             event, values = window.read()
 
-            if event in ('Não', None):
+            window.close()
 
-                window.close() # Fecha a janela
+            if event in ('Não', None): # Fecha a janela
 
                 return lista
 
             if event == 'Sim': # Deleta a pergunta desejada
-                
-                window.close()
 
                 DeletarPergunta(pergunta=pergunta[0], local=local)
 
@@ -230,29 +219,25 @@ def BotaoEditPergCont(pergunta, local, lista):
 
             event, conteudo_alterado = window.read()
 
-            # Cancela as alterações
+            window.close()
 
-            if event in ('Cancelar', None):
-
-                window.close()
+            if event in ('Cancelar', None): # Cancela as alterações e fecha a janela
 
                 return lista
 
-            if event == 'Salvar':
-
-                window.close()
-
-                # Confirma as alterações
+            if event == 'Salvar': # Confirma as alterações
 
                 window = Confirmar_Alterações()
 
                 event, values = window.read()
 
-                if event == 'Sim':
+                window.close()
 
-                    window.close()
+                if event in ('Não', None):
 
-                    # Salva as alterações
+                    window = Menu_Editar(conteudo=conteudo_alterado, pergunta=pergunta[0])
+
+                if event == 'Sim': # Salva as alterações
 
                     SalvarConteudo(conteudo=conteudo_alterado, local=local, pergunta=pergunta[0])
 
@@ -260,9 +245,4 @@ def BotaoEditPergCont(pergunta, local, lista):
 
                     return CriarListaPerguntas(local)
 
-                if event == 'Não':
-
-                    window.close()
-
-                    window = Menu_Editar(conteudo=conteudo_alterado, pergunta=pergunta[0])
 

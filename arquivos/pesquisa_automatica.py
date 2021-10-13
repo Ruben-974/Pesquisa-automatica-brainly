@@ -12,51 +12,39 @@ while True:
 
     local, pergunta = values['local'], values['pergunta']
 
+    window.close()
+
     Resultados_Terminal(event, values)
 
     if event in ('Sair', None): # O programa será finalizado por completo
-
-        window.close()
 
         break
 
     if event == 'Atualizar': # Programa será atualizado de acordo com as informações do usuario
 
-        window.close()
-
         valido, lista_perguntas = BotaoAtualizar(local) # Recebendo lista de perguntas do arquivo .xlsx
-
-        window = Menu_Principal(local=local, lista=lista_perguntas)
 
     if valido is True: # Opções liberadas quando o programa receber um arquivo .xlsx valido
 
         if event == 'Visualizar':
 
-            window.close()
-
             BotaoVisualizar(pergunta=pergunta, local=local) # Cria interfase para visualizar o conteudo
-
-            window = Menu_Principal(local=local, lista=lista_perguntas)
 
         if event == 'Editar lista':
 
-            window.close()
-
             lista_perguntas = BotaoEditarLista(lista_perguntas, local=local) # Cria interface do menu editar lista
 
-            window = Menu_Principal(local=local, lista=lista_perguntas)
-
         if event == 'Criar arquivo':
+
             pass
 
         if event == 'Atualizar respostas':
+
             pass
     
     elif event != 'Atualizar': # Caso o usuario tente com um arquivo valido irá aparecer uma mensagem de erro
 
-        window.close()
-
         Mensagem_Erro('Você deve escolher um arquivo .xlsx valido para usar essa opção!')
 
-        window = Menu_Principal(local=local, lista=lista_perguntas)
+    window = Menu_Principal(local=local, lista=lista_perguntas)
 

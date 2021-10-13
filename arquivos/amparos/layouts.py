@@ -19,7 +19,7 @@ def Menu_Principal(local, lista):
     """
 
     layout = [[sg.Input(local, key='local'), sg.FileBrowse('Browse', file_types=(("ALL Files", ".xlsx*"),)),sg.Button('Atualizar', size=(12, 0))],
-        [sg.Listbox(lista, key='pergunta', size=(68, 5), enable_events=True)],
+        [sg.Listbox(lista, key='pergunta', size=(68, 5))],
         [sg.Button('Visualizar'), sg.Button('Editar lista'),sg.Button('Criar arquivo'), sg.Button('Atualizar respostas'), sg.Button('Sair')]]
 
     return sg.Window('Menu Principal - Pesquisa Automatica v1.0', layout, location=(420, 300))
