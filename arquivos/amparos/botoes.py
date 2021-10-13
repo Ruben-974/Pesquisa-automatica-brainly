@@ -109,7 +109,7 @@ def BotaoEditarLista(lista, local):
 
             window.close()
 
-            BotaoEditPergCont(pergunta=pergunta, local=local)
+            lista = BotaoEditPergCont(pergunta=pergunta, local=local, lista=lista)
 
             window = Editar_Lista(lista)
 
@@ -210,30 +210,59 @@ def BotaoDellPergCont(pergunta, lista, local):
     
 # Executar quando o botão "Editar pergunta / conteudo" for chamado
 
-def BotaoEditPergCont(pergunta, local):
+def BotaoEditPergCont(pergunta, local, lista):
 
-    if pergunta == []:
+    if pergunta == []: # Caso o usuario não selecione uma pergunta
 
         Mensagem_Erro('Escolha uma pergunta da lista para editar')
 
+        return lista
+
     else:
 
-        conteudo = DicionarioComConteudo(pergunta[0], local)
+        conteudo_atual = DicionarioComConteudo(pergunta[0], local)
 
-        window = Menu_Editar(conteudo=conteudo)
+        window = Menu_Editar(conteudo=conteudo_atual, pergunta=pergunta[0])
 
         while True:
 
-            event, values = window.read()
+            # Cria um janela mostrando o conteudo original
+
+            event, conteudo_alterado = window.read()
+
+            # Cancela as alterações
 
             if event in ('Cancelar', None):
 
                 window.close()
 
-                break
+                return lista
 
             if event == 'Salvar':
 
-                pass
+                window.close()
 
+                # Confirma as alterações
+
+                window = Confirmar_Alterações()
+
+                event, values = window.read()
+
+                if event == 'Sim':
+
+                    window.close()
+
+                    # Salva as alterações
+
+                    SalvarConteudo(conteudo=conteudo_alterado, local=local, pergunta=pergunta[0])
+
+                    # Retorna uma lista atualizada pois o usuario pode alterar a pergunta que esta na lista
+
+                    return CriarListaPerguntas(local)
+
+                if event == 'Não':
+
+                    window.close()
+
+                    window = Menu_Editar(conteudo=conteudo_alterado, pergunta=pergunta[0])
 

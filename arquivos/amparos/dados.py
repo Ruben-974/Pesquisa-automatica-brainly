@@ -211,3 +211,36 @@ def DeletarPergunta(pergunta, local):
 
             break
     
+# Salva o conteudo alterado no menu de edição
+
+def SalvarConteudo(conteudo, local, pergunta):
+    
+    '''
+    Parameters: 
+
+        conteudo: Dicionario com as alterações
+
+        local: local do arquivo .xlsx (Valido)
+
+        pergunta: Pergunta que o ususario deseja alterar
+
+    '''
+
+    tabela = CriarDataFrame(local=local)
+
+    for linha in range(len(tabela)):
+
+        # Busca a sua pergunta na tabela e altera o conteudo
+
+        if tabela.loc[linha]['sua pergunta'] == pergunta:
+            
+            for key in tabela.loc[linha].keys():
+                
+                tabela.loc[linha][key] = conteudo[key]
+
+            # Salva a tabela alterada
+
+            tabela.to_excel(local)
+
+            break
+    
