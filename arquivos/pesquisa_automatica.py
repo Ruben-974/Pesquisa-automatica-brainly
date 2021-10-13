@@ -11,10 +11,10 @@ while True:
     event, values = window.read() # Abrindo a janela principal, para receber valores do usuario
 
     local, pergunta = values['local'], values['pergunta']
+    
+    Resultados_Terminal(event, values)
 
     window.close()
-
-    Resultados_Terminal(event, values)
 
     if event in ('Sair', None): # O programa será finalizado por completo
 
@@ -42,7 +42,7 @@ while True:
 
             pass
     
-    elif event != 'Atualizar': # Caso o usuario tente com um arquivo valido irá aparecer uma mensagem de erro
+    elif event != 'Atualizar': # Caso o usuario tente com um arquivo invalido irá aparecer uma mensagem de erro
 
         Mensagem_Erro('Você deve escolher um arquivo .xlsx valido para usar essa opção!')
 
