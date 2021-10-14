@@ -114,6 +114,16 @@ def Recebe_Pergunta():
 # Janela que recebe sim ou não para deletar a pergunta
 
 def Janela_deletar(pergunta):
+    """
+    Parameters:
+
+        pergunta: Necessario para mostrar a sua pergunta na janela
+
+    Returns:
+
+        return sg.Window(...): Todas infomações necessarias para iniciar a janela com .read()
+
+    """
 
     if len(pergunta) > 35:
 
@@ -128,6 +138,18 @@ def Janela_deletar(pergunta):
 # Janela para editar conteudo da pergunta escolhida
 
 def Menu_Editar(conteudo, pergunta):
+    """
+    Parameters:
+
+        conteudo: recebe uma lista expesifica para mostrar o conteudo
+
+        pergunta: Necessario para mostrar a sua pergunta na janela
+
+    Returns:
+
+        return sg.Window(...): Todas infomações necessarias para iniciar a janela com .read()
+
+    """
 
     if len(pergunta) > 70:
 
@@ -151,6 +173,13 @@ def Menu_Editar(conteudo, pergunta):
 # Janela para salvar alterações 
 
 def Confirmar_Alterações():
+
+    """
+    Returns:
+
+        return sg.Window(...): Todas infomações necessarias para iniciar a janela com .read()
+
+    """
 
     layout = [[sg.Text('Deseja salvar as alterações?')],
               [sg.Button('Sim'), sg.Button('Não')]]
