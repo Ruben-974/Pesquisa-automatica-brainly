@@ -10,10 +10,9 @@ from time import sleep
 opc = Options()
 opc.headless = True # Esconder navegador? True or False
 
-tempo = 0
-resultado = {}
+encontrou, tempo, resultado = True, 0, {}
 
-resultado['sua pergunta'] = 'Oque foi a revolução francesa?'
+resultado['sua pergunta'] = 'dkjfklsdjfkldsjfokdsjkdfjds'
 
 try:
 
@@ -25,48 +24,63 @@ except selenium.common.exceptions.WebDriverException:
 
 else:
 
-    driver.get(f'https://brainly.com.br/app/ask?q={resultado["sua pergunta"]}')
+    try:
 
-    while True:
+        driver.get(f'https://brainly.com.br/app/ask?q={resultado["sua pergunta"]}')
 
-        try:
-            sleep(1)
+    except selenium.common.exceptions.WebDriverException:
 
-            driver.find_element_by_xpath("//div[@class='sg-box sg-box--light sg-box--padding-m sg-box--border-color-gray-secondary-lightest sg-box--border SearchResultsSection__layout--2Ya_t LayoutBox__box--1H22h']/div[1]/div[@class='sg-content-box__content sg-content-box__content--spaced-bottom-xlarge']/div[1]/div[1]/div[1]/a[1]").click()
-
-            break
-
-        except:
-
-            tempo += 1
-
-            if tempo > 10:
-                break
-
-    if tempo < 10:
-
-        resultado['resposta similar']  = driver.find_element_by_xpath("//h1/span[1]").text
-
-        respostas = driver.find_elements_by_xpath("//div[@class='sg-text sg-text--break-words brn-rich-content js-answer-content']")
-
-        resultado['primeira resposta'] = respostas[0].text
-
-        try:
-
-            resultado['segunda resposta']  = respostas[1].text
-
-        except IndexError:
-
-            resultado['segunda resposta'] = 'Não há segunda resposta'
-
-        driver.close()
-
-        print(tempo)
-
-        for k, i in resultado.items():
-            print(f'Chave: {k}\nItem: {i}')
+        print('Não foi possivel acessar o site, verifique a sua internet')
 
     else:
 
-        print('houve um erro')
-        driver.close()
+        while True:
+
+            try:
+                
+                sleep(1)
+
+                driver.find_elements_by_xpath("//a[@class='sg-text sg-text--small sg-text--link sg-text--bold']")[0].click()
+
+                break
+
+            except selenium.common.exceptions.InvalidSelectorException:
+
+                tempo += 1
+
+                if tempo == 10:
+
+                    break
+
+            except IndexError:
+
+                print('A resposta da sua pergunta não foi encontrada no brainly')
+
+                encontrou = False
+
+                break
+
+        if tempo <= 10 and encontrou:
+
+            resultado['resposta similar']  = driver.find_element_by_xpath("//h1/span[1]").text
+
+            respostas = driver.find_elements_by_xpath("//div[@class='sg-text sg-text--break-words brn-rich-content js-answer-content']")
+
+            resultado['primeira resposta'] = respostas[0].text
+
+            try:
+
+                resultado['segunda resposta']  = respostas[1].text
+
+            except IndexError:
+
+                resultado['segunda resposta'] = 'Não há segunda resposta'
+
+            driver.close()
+
+            print(tempo)
+
+            for k, i in resultado.items():
+                print(f'Chave: {k}\nItem: {i}')
+
+driver.close()
