@@ -34,11 +34,11 @@ while True:
 
             lista_perguntas = BotaoEditarLista(lista_perguntas, local=local) # Cria interface do menu editar lista
 
-        if event == 'Criar arquivo':
-
-            pass
-
         if event == 'Atualizar respostas':
+
+            BotaoAtualizarResp(local=local)
+
+        if event == 'Criar arquivo':
 
             pass
     

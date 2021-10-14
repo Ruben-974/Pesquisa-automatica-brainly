@@ -1,9 +1,9 @@
 
 import PySimpleGUI as sg
 
-# Cria janela principal do programa
+# --=-=-- Janelas de Navegação --=-=--
 
-def Menu_Principal(local, lista):
+def Menu_Principal(local, lista): # Cria janela principal do programa
 
     """
     Parameters:
@@ -24,60 +24,7 @@ def Menu_Principal(local, lista):
 
     return sg.Window('Menu Principal - Pesquisa Automatica v1.0', layout, location=(420, 300))
 
-# Cria uma janela de erro "Personalizada" :D
-
-def Mensagem_Erro(msg):
-
-    """
-    Parameters:
-
-        msg: Mensagem de erro que será visualizada
-    
-    """
-
-    layout = [[sg.Text(msg)], [sg.Button('Ok')]]
-    window = sg.Window('Erro - Pesquisa automatica v1.0', layout)
-    window.read()
-    window.close()
-
-# Cria uma janela para visualizar o conteudo sobre a pergunta
-
-def Visualizar_Conteudo(conteudo):
-
-    '''
-    Parameters:
-
-        conteudo: Recebe um dicionario expesifico e cria uma janela para visualizar o seu conteudo
-
-    '''
-
-    layout = [[sg.Multiline(
-        f'\n- Sua pergunta - \n\n'
-        f'{conteudo["sua pergunta"]}\n\n'
-        f' - 1° Resposta - \n\n'
-        f'{conteudo["1 pergunta similar 1 resposta"]}\n\n'
-        f' - 2° Resposta - \n\n'
-        f'{conteudo["1 pergunta similar 2 resposta"]}\n\n'
-        f' - 3° Resposta - \n\n'
-        f'{conteudo["2 pergunta similar 1 resposta"]}\n\n'
-        f' - 4° Resposta - \n\n'
-        f'{conteudo["2 pergunta similar 2 resposta"]}',
-        size=(90, 25))], [sg.Button('Ok')]]
-
-    # Caso os caracters da pergunta for > 70 ira diminuir o tamanho para 70 caracters, para visualizar na bar
-
-    if len(conteudo["sua pergunta"]) > 70:
-        window = sg.Window(f'{conteudo["sua pergunta"][:70]}... - Pesquisa automatica v1.0', layout)
-    
-    elif len(conteudo["sua pergunta"]) <= 70:
-        window = sg.Window(f'{conteudo["sua pergunta"]} - Pesquisa automatica v1.0', layout)
-
-    window.read()
-    window.close()
-
-# Cria a janela de Editar lista
-
-def Editar_Lista(lista):
+def Editar_Lista(lista): # Cria a janela de Editar lista
 
     """
     Parameters:
@@ -96,48 +43,9 @@ def Editar_Lista(lista):
 
     return sg.Window('Editar lista - Pesquisa automatica v1.0', layout)
 
-# Janela que recebe uma pergunta
+# --=-=-- Janelas de Modificação --=-=--
 
-def Recebe_Pergunta():
-
-    """
-    Returns:
-
-        return sg.Window(...): Todas infomações necessarias para iniciar a janela com .read()
-    """
-
-    layout = [[sg.Input(key='adicionar_pergunta')],
-             [sg.Button('Adicionar'), sg.Button('Cancelar')]]
-
-    return sg.Window('Adicionar pergunta - Pesquisa Automatica v1.0', layout)
-
-# Janela que recebe sim ou não para deletar a pergunta
-
-def Janela_deletar(pergunta):
-    """
-    Parameters:
-
-        pergunta: Necessario para mostrar a sua pergunta na janela
-
-    Returns:
-
-        return sg.Window(...): Todas infomações necessarias para iniciar a janela com .read()
-
-    """
-
-    if len(pergunta) > 35:
-
-        pergunta = pergunta[:35]
-
-    layout = [[sg.Text(f'Deletar pergunta / conteudo da pergunta:\n'
-               f'{pergunta} ...')],
-              [sg.Button('Sim'), sg.Button('Não')]]
-
-    return sg.Window('Deletar pergunta - Pesquisa automatica v1.0', layout)
-
-# Janela para editar conteudo da pergunta escolhida
-
-def Menu_Editar(conteudo, pergunta):
+def Menu_Editar(conteudo, pergunta): # Janela para editar conteudo da pergunta escolhida
     """
     Parameters:
 
@@ -169,10 +77,94 @@ def Menu_Editar(conteudo, pergunta):
         [sg.Button('Salvar'), sg.Button('Cancelar')]]
 
     return sg.Window(f'{pergunta} - Pesquisa automatica v1.0', layout)
-    
-# Janela para salvar alterações 
+ 
+def Recebe_Pergunta(): # Janela que recebe uma pergunta
 
-def Confirmar_Alterações():
+    """
+    Returns:
+
+        return sg.Window(...): Todas infomações necessarias para iniciar a janela com .read()
+    """
+
+    layout = [[sg.Input(key='adicionar_pergunta')],
+             [sg.Button('Adicionar'), sg.Button('Cancelar')]]
+
+    return sg.Window('Adicionar pergunta - Pesquisa Automatica v1.0', layout)
+
+def Janela_deletar(pergunta): # Janela que recebe sim ou não para deletar a pergunta
+    """
+    Parameters:
+
+        pergunta: Necessario para mostrar a sua pergunta na janela
+
+    Returns:
+
+        return sg.Window(...): Todas infomações necessarias para iniciar a janela com .read()
+
+    """
+
+    if len(pergunta) > 35:
+
+        pergunta = pergunta[:35]
+
+    layout = [[sg.Text(f'Deletar pergunta / conteudo da pergunta:\n'
+               f'{pergunta} ...')],
+              [sg.Button('Sim'), sg.Button('Não')]]
+
+    return sg.Window('Deletar pergunta - Pesquisa automatica v1.0', layout)
+
+# --=-=-- Janelas de Visualização --=-=--
+
+def Mensagem_Erro(msg): # Cria uma janela de erro "Personalizada" :D
+
+    """
+    Parameters:
+
+        msg: Mensagem de erro que será visualizada
+    
+    """
+
+    layout = [[sg.Text(msg)], [sg.Button('Ok')]]
+    window = sg.Window('Erro - Pesquisa automatica v1.0', layout)
+    window.read()
+    window.close()
+
+def Visualizar_Conteudo(conteudo): # Cria uma janela para visualizar o conteudo sobre a pergunta
+
+    '''
+    Parameters:
+
+        conteudo: Recebe um dicionario expesifico e cria uma janela para visualizar o seu conteudo
+
+    '''
+
+    layout = [[sg.Multiline(
+        f'\n- Sua pergunta - \n\n'
+        f'{conteudo["sua pergunta"]}\n\n'
+        f' - 1° Resposta - \n\n'
+        f'{conteudo["1 pergunta similar 1 resposta"]}\n\n'
+        f' - 2° Resposta - \n\n'
+        f'{conteudo["1 pergunta similar 2 resposta"]}\n\n'
+        f' - 3° Resposta - \n\n'
+        f'{conteudo["2 pergunta similar 1 resposta"]}\n\n'
+        f' - 4° Resposta - \n\n'
+        f'{conteudo["2 pergunta similar 2 resposta"]}',
+        size=(90, 25))], [sg.Button('Ok')]]
+
+    # Caso os caracters da pergunta for > 70 ira diminuir o tamanho para 70 caracters, para visualizar na bar
+
+    if len(conteudo["sua pergunta"]) > 70:
+        window = sg.Window(f'{conteudo["sua pergunta"][:70]}... - Pesquisa automatica v1.0', layout)
+    
+    elif len(conteudo["sua pergunta"]) <= 70:
+        window = sg.Window(f'{conteudo["sua pergunta"]} - Pesquisa automatica v1.0', layout)
+
+    window.read()
+    window.close()
+ 
+# --=-=-- Janelas de Confirmação --=-=--
+
+def Confirmar_Alterações(): # Janela para salvar alterações 
 
     """
     Returns:
@@ -186,9 +178,10 @@ def Confirmar_Alterações():
 
     return sg.Window('Confirmar', layout)
 
-# Um print "especial" para visualizar oque está acontecendo no terminal enquanto o programa e executado
+# --=-=-- Outras demonstrações --=-=--
 
-def Resultados_Terminal(event, values):
+def Resultados_Terminal(event, values): # Visualizar oque está acontecendo no terminal
+
     '''
     Parameters:
 

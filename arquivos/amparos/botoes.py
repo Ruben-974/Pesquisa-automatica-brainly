@@ -245,4 +245,8 @@ def BotaoEditPergCont(pergunta, local, lista):
 
                     return CriarListaPerguntas(local)
 
+# Executar quando o botão "Atualizar respostas" for chamado
 
+def BotaoAtualizarResp(local):
+
+    pass
