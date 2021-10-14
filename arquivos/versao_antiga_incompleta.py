@@ -5,9 +5,6 @@ import PySimpleGUI as sg
 import pandas as pd
 import os
 
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.common.keys import Keys
-from selenium import webdriver
 from time import sleep
 from amparos.dados import VerificarXlsx
 

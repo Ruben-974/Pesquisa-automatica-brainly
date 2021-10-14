@@ -43,6 +43,21 @@ def Editar_Lista(lista): # Cria a janela de Editar lista
 
     return sg.Window('Editar lista - Pesquisa automatica v1.0', layout)
 
+def Atualizar_respostas():
+
+    """
+    Returns:
+
+        return sg.Window(...): Todas infomações necessarias para iniciar a janela com .read()
+    """
+
+    layout = [[sg.Radio('Atualizar tudo', key='Tudo', group_id='radio_1')],
+        [sg.Radio('Atualizar o necessario', key='Necessario', group_id='radio_1', default=True)],
+        [sg.Radio('Atualização personalizada', key='Personalizado', group_id='radio_1')],
+        [sg.Button('Ok'), sg.Button('Cancelar')]]
+
+    return sg.Window('Atualizar respostas - Pesquisa automatica v1.0', layout)
+
 # --=-=-- Janelas de Modificação --=-=--
 
 def Menu_Editar(conteudo, pergunta): # Janela para editar conteudo da pergunta escolhida

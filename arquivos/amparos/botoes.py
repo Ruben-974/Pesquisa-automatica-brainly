@@ -249,4 +249,30 @@ def BotaoEditPergCont(pergunta, local, lista):
 
 def BotaoAtualizarResp(local):
 
-    pass
+    window = Atualizar_respostas()
+
+    while True:
+
+        event, values = window.read()
+
+        Resultados_Terminal(event=event, values=values)
+
+        window.close()
+
+        if event in ('Cancelar', None):
+
+            break
+
+        if event == 'Ok':
+
+            if values['Tudo']:
+                 
+                pass
+            
+            if values['Necessario']:
+
+                pass
+
+            if values['Personalizado']:
+
+                pass
