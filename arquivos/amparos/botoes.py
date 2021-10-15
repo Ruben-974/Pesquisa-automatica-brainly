@@ -273,7 +273,9 @@ def BotaoAtualizarResp(lista, local):
             
             if values['Necessario']:
 
-                pass
+                for pergunta in lista:
+
+                    PerguntaParaAtualizar(pergunta=pergunta, local=local, atualizar='necessario')
 
             if values['Personalizado']:
 

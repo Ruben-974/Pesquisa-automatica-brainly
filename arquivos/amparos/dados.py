@@ -1,4 +1,5 @@
 
+from numpy import NaN, nan
 import pandas as pd
 
 from amparos.pesquisa import Pesquisar_Pergunta
@@ -250,12 +251,43 @@ def PerguntaParaAtualizar(pergunta, local, atualizar='tudo'):
 
     conteudo = DicionarioComConteudo(pergunta=pergunta, local=local)
 
-    print(conteudo,'\n\n')
-
     if atualizar == 'tudo':
 
         conteudo = Pesquisar_Pergunta(pergunta=conteudo['sua pergunta'])
 
         print(conteudo, '\n\n')
+    
+    if atualizar == 'necessario':
 
-        SalvarConteudo(conteudo=conteudo, local=local, pergunta=pergunta)
+        sem_resp = []
+        result = []
+        verificar = ['1 pergunta similar 1 resposta', '1 pergunta similar 2 resposta', 
+                     '2 pergunta similar 1 resposta', '2 pergunta similar 2 resposta']
+
+        for k, v in conteudo.items():
+
+            if type(v) != str:
+
+                sem_resp.append(k)
+
+        for i in range(len(verificar)):
+
+            if verificar[i] in sem_resp:
+
+                result.append(True)
+
+            else:
+
+                result.append(False)
+
+        new_conteudo = Pesquisar_Pergunta(pergunta=conteudo['sua pergunta'], primeira_res=(result[0], result[1]), segunda_res=(result[2], result[3]))
+
+        for k, v in new_conteudo.copy().items():
+
+            if v != '':
+
+                conteudo[k] = v
+
+    SalvarConteudo(conteudo=conteudo, local=local, pergunta=pergunta)
+        
+        
