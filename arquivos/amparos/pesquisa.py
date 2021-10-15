@@ -77,11 +77,13 @@ else:
 
                     if tempo == 10:
 
+                        print('Tempo esgotado')
+
                         break
 
                 except IndexError:
 
-                    print(f'A {c}° resposta da sua pergunta não foi encontrada no brainly')
+                    print(f'A {c+1}° resposta da sua pergunta não foi encontrada no brainly')
 
                     encontrou = False
 
@@ -115,5 +117,5 @@ else:
 
                 driver.close()
 
-    for k, i in resultado.items():
-        print(f'\nChave: {k}\nItem: {i}\n')
+for k, i in resultado.items():
+    print(f'\nChave: {k}\nItem: {i}\n')
