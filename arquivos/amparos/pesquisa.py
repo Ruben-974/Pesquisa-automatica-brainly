@@ -8,21 +8,36 @@ from selenium import webdriver
 from time import sleep
 
 opc = Options()
-opc.headless = True # Esconder navegador? True or False
+opc.headless = False # Esconder navegador? True or False
 
-encontrou, tempo, resultado = True, 0, {}
+encontrou, tempo, cont_pesq, resultado = True, 0, 1, {}
 
-resultado['sua pergunta'] = 'dkjfklsdjfkldsjfokdsjkdfjds'
+resultado = {
+    'sua pergunta': 'resumo segunda guerra mundial',
+    '1 pergunta similar': '',
+    '1 pergunta similar 1 resposta': '',
+    '1 pergunta similar 2 resposta': '',
+    '2 pergunta similar': '',
+    '2 pergunta similar 1 resposta': '',
+    '2 pergunta similar 2 resposta': '',
+}
 
-try:
+primeira_res = (True, False)
+segunda_res = (False, False)
 
-    driver = webdriver.Firefox(executable_path='arquivos/driver/geckodriver.exe', options=opc)
+if True in segunda_res:
+    
+    cont_pesq = 2
 
-except selenium.common.exceptions.WebDriverException:
+for c in range(0, cont_pesq):
 
-    print('O arquivo geckodrive.exe não foi encontrado, verifique a pasta "arquivos/driver/"')
+    try:
 
-else:
+        driver = webdriver.Firefox(executable_path='arquivos/driver/geckodriver.exe', options=opc)
+
+    except selenium.common.exceptions.WebDriverException:
+
+        print('O arquivo geckodrive.exe não foi encontrado, verifique a pasta "arquivos/driver/"')
 
     try:
 
@@ -40,7 +55,7 @@ else:
                 
                 sleep(1)
 
-                driver.find_elements_by_xpath("//a[@class='sg-text sg-text--small sg-text--link sg-text--bold']")[0].click()
+                driver.find_elements_by_xpath("//a[@class='sg-text sg-text--small sg-text--link sg-text--bold']")[c].click()
 
                 break
 
@@ -54,7 +69,7 @@ else:
 
             except IndexError:
 
-                print('A resposta da sua pergunta não foi encontrada no brainly')
+                print(f'A {c}° resposta da sua pergunta não foi encontrada no brainly')
 
                 encontrou = False
 
@@ -62,25 +77,31 @@ else:
 
         if tempo <= 10 and encontrou:
 
-            resultado['resposta similar']  = driver.find_element_by_xpath("//h1/span[1]").text
+            resultado[f'{c+1} pergunta similar']  = driver.find_element_by_xpath("//h1/span[1]").text
 
-            respostas = driver.find_elements_by_xpath("//div[@class='sg-text sg-text--break-words brn-rich-content js-answer-content']")
+            if c == 0:
 
-            resultado['primeira resposta'] = respostas[0].text
+                inc = primeira_res
 
-            try:
+            else:
 
-                resultado['segunda resposta']  = respostas[1].text
+                inc = segunda_res
 
-            except IndexError:
+            if inc[0]:
 
-                resultado['segunda resposta'] = 'Não há segunda resposta'
+                resultado[f'{c+1} pergunta similar 1 resposta'] = driver.find_elements_by_xpath("//div[@class='sg-text sg-text--break-words brn-rich-content js-answer-content']")[0].text
+
+            if inc[1]:
+
+                try:
+
+                    resultado[f'{c+1} pergunta similar 2 resposta'] = driver.find_elements_by_xpath("//div[@class='sg-text sg-text--break-words brn-rich-content js-answer-content']")[1].text
+
+                except IndexError:
+
+                    resultado[f'{c+1} pergunta similar 2 resposta'] = 'Não há segunda resposta'
 
             driver.close()
 
-            print(tempo)
-
-            for k, i in resultado.items():
-                print(f'Chave: {k}\nItem: {i}')
-
-driver.close()
+for k, i in resultado.items():
+        print(f'\nChave: {k}\nItem: {i}\n')
