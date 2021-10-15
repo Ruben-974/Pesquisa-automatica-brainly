@@ -247,7 +247,7 @@ def BotaoEditPergCont(pergunta, local, lista):
 
 # Executar quando o botão "Atualizar respostas" for chamado
 
-def BotaoAtualizarResp(local):
+def BotaoAtualizarResp(lista, local):
 
     window = Atualizar_respostas()
 
@@ -261,13 +261,15 @@ def BotaoAtualizarResp(local):
 
         if event in ('Cancelar', None):
 
-            break
+            return lista
 
         if event == 'Ok':
 
             if values['Tudo']:
-                 
-                pass
+
+                for pergunta in lista:
+
+                    PerguntaParaAtualizar(pergunta=pergunta, local=local, atualizar='tudo')
             
             if values['Necessario']:
 
@@ -276,3 +278,5 @@ def BotaoAtualizarResp(local):
             if values['Personalizado']:
 
                 pass
+
+            return CriarListaPerguntas(local_xlsx=local)

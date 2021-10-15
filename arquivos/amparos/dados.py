@@ -1,6 +1,8 @@
 
 import pandas as pd
 
+from amparos.pesquisa import Pesquisar_Pergunta
+
 # Verifica se o arquico .xlsx e um arquivo valido
 
 def VerificarXlsx(local):
@@ -244,3 +246,16 @@ def SalvarConteudo(conteudo, local, pergunta):
 
             break
     
+def PerguntaParaAtualizar(pergunta, local, atualizar='tudo'):
+
+    conteudo = DicionarioComConteudo(pergunta=pergunta, local=local)
+
+    print(conteudo,'\n\n')
+
+    if atualizar == 'tudo':
+
+        conteudo = Pesquisar_Pergunta(pergunta=conteudo['sua pergunta'])
+
+        print(conteudo, '\n\n')
+
+        SalvarConteudo(conteudo=conteudo, local=local, pergunta=pergunta)

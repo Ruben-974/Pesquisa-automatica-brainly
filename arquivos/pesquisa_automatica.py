@@ -36,7 +36,7 @@ while True:
 
         if event == 'Atualizar respostas':
 
-            BotaoAtualizarResp(local=local)
+            BotaoAtualizarResp(lista=lista_perguntas, local=local)
 
         if event == 'Criar arquivo':
 
