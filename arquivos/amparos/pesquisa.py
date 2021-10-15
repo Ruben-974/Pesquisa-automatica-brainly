@@ -10,7 +10,7 @@ from time import sleep
 opc = Options()
 opc.headless = True # Esconder navegador? True or False
 
-encontrou, tempo, fim_cont_pesq, ini_cont_pesq, resultado = True, 0, 1, 0, {}
+tempo, fim_cont_pesq, ini_cont_pesq, resultado = 0, 1, 0, {}
 
 resultado = {'sua pergunta': input('Digite a sua pergunta: ')}
 
@@ -62,6 +62,8 @@ else:
         else:
 
             while True:
+
+                encontrou = True
 
                 try:
                     
