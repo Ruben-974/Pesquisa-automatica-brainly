@@ -2,7 +2,7 @@
 from numpy import NaN, nan
 import pandas as pd
 
-from amparos.pesquisa import Pesquisar_Pergunta
+from amparos.pesquisa_com_driver import Pesquisar_Pergunta
 
 # Verifica se o arquico .xlsx e um arquivo valido
 

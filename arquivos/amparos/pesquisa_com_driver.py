@@ -10,9 +10,9 @@ from time import sleep
 def Pesquisar_Pergunta(pergunta=str, primeira_res=(True, True), segunda_res=(True, True)):
 
     opc = Options()
-    opc.headless = True # Esconder navegador? True or False
+    opc.headless = False # Esconder navegador? True or False
 
-    fim_contagem, ini_contagem = 1, 0
+    fim_contagem, ini_contagem = top1, 0
 
     resultado = {
         'sua pergunta': pergunta,
@@ -44,7 +44,7 @@ def Pesquisar_Pergunta(pergunta=str, primeira_res=(True, True), segunda_res=(Tru
 
             try:
 
-                driver = webdriver.Firefox(executable_path='arquivos/driver/geckodriver.exe', options=opc)
+                driver = webdriver.Firefox(executable_path='arquivos/driver/geckodriver', options=opc)
 
             except selenium.common.exceptions.WebDriverException:
 
@@ -122,4 +122,4 @@ def Pesquisar_Pergunta(pergunta=str, primeira_res=(True, True), segunda_res=(Tru
 
     return resultado
 
-# Pesquisar_Pergunta(pergunta='Qual a formula da agua?', primeira_res=(False, False), segunda_res=(True, False))
+#print(Pesquisar_Pergunta(pergunta='Qual a formula da agua?', primeira_res=(False, False), segunda_res=(True, False)))

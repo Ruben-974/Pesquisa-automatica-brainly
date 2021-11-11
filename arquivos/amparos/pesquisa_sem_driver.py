@@ -48,7 +48,7 @@ print(quant, inc)
 
 if quant != 0:
 
-    for l in search(quest, tld='co.in', start=inc, num=quant, pause=30, user_agent='Mozilla/5.0'):
+    for l in search(quest, tld='co.in', start=inc, num=quant, pause=15, user_agent='Mozilla/5.0'):
 
         links.append(l)
 
