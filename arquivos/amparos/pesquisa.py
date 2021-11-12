@@ -154,9 +154,9 @@ def Pesquisa_Sem_Driver(pergunta, primeira_res=(True, True), segunda_res=(True, 
 
         del links[0]
 
-    print(links)
-
     if links != []:
+
+        print(links)
 
         for c in range(len(links)):
 
@@ -180,15 +180,21 @@ def Pesquisa_Sem_Driver(pergunta, primeira_res=(True, True), segunda_res=(True, 
 
                     resultado[f'{c+1} pergunta similar {c2+1} resposta'] += c3.get_text() + '\n'
 
-                resultado[f'{c+1} pergunta similar {c2+1} resposta'] = resultado[f'{c+1} pergunta similar {c2+1} resposta'].strip()
+                resultado[f'{c+1} pergunta similar {c2+1} resposta'] = resultado[f'{c+1} pergunta similar {c2+1} resposta'].strip().replace('\n\n\n', '')
 
             if resultado[f'{c+1} pergunta similar 1 resposta'] == '':
                 
-                resultado[f'{c+1} pergunta similar 1 resposta'] = resp[0].get_text().strip()
+                resultado[f'{c+1} pergunta similar 1 resposta'] = resp[0].get_text().strip().replace('\n\n\n', '')
 
             if resultado[f'{c+1} pergunta similar 2 resposta'] == '':
 
-                resultado[f'{c+1} pergunta similar 2 resposta'] = resp[1].get_text().strip()
+                try:
+
+                    resultado[f'{c+1} pergunta similar 2 resposta'] = resp[1].get_text().strip().replace('\n\n\n', '')
+
+                except IndexError:
+
+                    resultado[f'{c+1} pergunta similar 2 resposta'] = 'Não houve segunda resposta'
 
         if primeira_res[0] == False:
 
@@ -206,11 +212,11 @@ def Pesquisa_Sem_Driver(pergunta, primeira_res=(True, True), segunda_res=(True, 
 
             resultado['2 pergunta similar 2 resposta'] = ''
 
-        return resultado
+    return resultado
 
         
-respostas = Pesquisa_Com_Driver(pergunta='Resumo segunda guerra mundial', primeira_res=(True, True), segunda_res=(True, True))
+#respostas = Pesquisa_Com_Driver(pergunta='Resumo segunda guerra mundial', primeira_res=(True, True), segunda_res=(True, True))
 
-for k, v in respostas.items():
+#for k, v in respostas.items():
 
-    print(f'\033[1;32mChave:\033[m {k}\n\033[1;32mItem:\033[m {v[0:50]}\n')
+#    print(f'\033[1;32mChave:\033[m {k}\n\033[1;32mItem:\033[m {v[0:50]}\n')

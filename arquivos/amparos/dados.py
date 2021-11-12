@@ -253,7 +253,7 @@ def PerguntaParaAtualizar(pergunta, local, atualizar='tudo'):
 
     if atualizar == 'tudo':
 
-        conteudo = Pesquisa_Com_Driver(pergunta=conteudo['sua pergunta'])
+        conteudo = Pesquisa_Sem_Driver(pergunta=conteudo['sua pergunta'])
 
         print(conteudo, '\n\n')
     
@@ -280,7 +280,7 @@ def PerguntaParaAtualizar(pergunta, local, atualizar='tudo'):
 
                 result.append(False)
 
-        new_conteudo = Pesquisa_Com_Driver(pergunta=conteudo['sua pergunta'], primeira_res=(result[0], result[1]), segunda_res=(result[2], result[3]))
+        new_conteudo = Pesquisa_Sem_Driver(pergunta=conteudo['sua pergunta'], primeira_res=(result[0], result[1]), segunda_res=(result[2], result[3]))
 
         for k, v in new_conteudo.copy().items():
 
