@@ -160,11 +160,11 @@ def Pesquisa_Sem_Driver(pergunta, primeira_res=(True, True), segunda_res=(True, 
 
         for c in range(len(links)):
 
-            sleep(5)
+            sleep(10)
 
             html = Request(links[c], headers={'User-Agent': 'Mozilla/5.0'})
 
-            html = urlopen(html).read()
+            html = urlopen(html, timeout=10).read()
 
             html = BeautifulSoup(html, 'html.parser')
 
